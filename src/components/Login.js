@@ -1,7 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { Header } from "./Header";
 
+const FORM_TYPE={
+    SIGN_IN : "Sign In",
+    SIGN_UP : "Sign Up"
+}
+
 export function Login(){
+    const [isSignin , setIsSignin ] = useState(true);
+
+    function toggleSignin(){
+        setIsSignin(!isSignin)
+    }
+
+    const formType = isSignin ? FORM_TYPE.SIGN_IN : FORM_TYPE.SIGN_UP
     return(
         <div className="relative h-full w-full">
             <Header/>
@@ -13,13 +25,14 @@ export function Login(){
             />
             </div>
             <form className="flex flex-col justify-start bg-black p-12 w-3/12  absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2  bg-opacity-85">
-                <h1 className=" text-white text-3xl text-start m-2 my-4 ">Sign in</h1>
+                <h1 className=" text-white text-3xl text-start m-2 my-4 ">{formType}</h1>
                 <input type="text" placeholder="Email address" className="p-2 m-2 w-full"/>
+               { !isSignin && <input type="text" placeholder="Name" className="p-2 m-2 w-full"/> }
                 <input type="password" placeholder="password" className="p-2 m-2 w-full"/>
               
-                <button className="p-2 m-2 my-4 bg-red-700 w-full">Sign In</button>
+                <button className="p-2 m-2 my-4 bg-red-700 w-full">{formType}</button>
                 <div className="m-2 my-6 flex flex-row gap-2">
-            <p className="text-white  text-sm">Don't you have an account?</p><p className=" text-blue-500 text-sm">Sign Up</p>
+            <p className="text-white  text-sm">{isSignin ? "No Account?":"Already registered!" }</p><p className=" text-blue-500 text-sm" onClick={toggleSignin}>{isSignin ? FORM_TYPE.SIGN_UP : FORM_TYPE.SIGN_IN}</p>
             </div>
             </form>
 
