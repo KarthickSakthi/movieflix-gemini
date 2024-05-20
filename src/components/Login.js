@@ -4,9 +4,12 @@ import { validateFormData } from "../utils/validate";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
 import { auth } from "../utils/firebase.js";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUser } from "../store/userSlice.js";
 
 const FORM_TYPE = {
   SIGN_IN: "Sign In",
@@ -15,6 +18,7 @@ const FORM_TYPE = {
 
 export function Login() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [isSignin, setIsSignin] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
   const emailRef = useRef({});
@@ -48,6 +52,23 @@ export function Login() {
         .then((userCredential) => {
           // Signed up
           const user = userCredential.user;
+
+          updateProfile(user, {
+            displayName: nameRef.current.value,
+            photoURL:
+              "https://c8.alamy.com/compfr/mrpm90/jeune-homme-cartoon-mrpm90.jpg",
+          })
+            .then(() => {
+              // Profile updated!
+              const { uid, email, displayName, photoURL } = auth.currentUser;
+              dispatch(addUser({ uid, email, displayName, photoURL }));
+              navigate("/browse");
+            })
+            .catch((error) => {
+              // An error occurred
+              setErrorMessage(error.message);
+            });
+
           console.log({ user });
           navigate("/browse");
         })
