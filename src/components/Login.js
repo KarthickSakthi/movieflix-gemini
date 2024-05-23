@@ -7,9 +7,10 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../utils/firebase.js";
-import { useNavigate } from "react-router-dom";
+
 import { useDispatch } from "react-redux";
 import { addUser } from "../store/userSlice.js";
+import { BACKGROUND_IMAGE_SIGNIN, USER_AVATAR } from "../constants.js";
 
 const FORM_TYPE = {
   SIGN_IN: "Sign In",
@@ -17,7 +18,6 @@ const FORM_TYPE = {
 };
 
 export function Login() {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isSignin, setIsSignin] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
@@ -55,22 +55,17 @@ export function Login() {
 
           updateProfile(user, {
             displayName: nameRef.current.value,
-            photoURL:
-              "https://c8.alamy.com/compfr/mrpm90/jeune-homme-cartoon-mrpm90.jpg",
+            photoURL: USER_AVATAR,
           })
             .then(() => {
               // Profile updated!
               const { uid, email, displayName, photoURL } = auth.currentUser;
               dispatch(addUser({ uid, email, displayName, photoURL }));
-              navigate("/browse");
             })
             .catch((error) => {
               // An error occurred
               setErrorMessage(error.message);
             });
-
-          console.log({ user });
-          navigate("/browse");
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -85,9 +80,6 @@ export function Login() {
       )
         .then((userCredential) => {
           // Signed in
-          const user = userCredential.user;
-          console.log("logged in user: ", user);
-          navigate("/browse");
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -113,7 +105,7 @@ export function Login() {
       <Header />
       <div className="w-full h-full">
         <img
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/d253acf4-a1e2-4462-a416-f78802dc2d85/f04bf88c-f71c-4d02-82ed-adb870b8f8db/IN-en-20240429-POP_SIGNUP_TWO_WEEKS-perspective_WEB_658a042e-62cf-473d-8da0-7b875f23e2ef_large.jpg"
+          src={BACKGROUND_IMAGE_SIGNIN}
           alt="login background"
           className="w-full h-[100vh]"
         />
