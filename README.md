@@ -14,6 +14,21 @@
  - Created redux store
  - Implemented sign out
  - Update profile
+ - BugFix: Sign up User display name and Profile picture update
+ - BugFix: if the user is not logged in Redirect / Browse to Login Page and vice-versa
+ - Unsubscribed to onAuthStateChanged callback
+ - Add hardcoded values to constant file
+ - Registered in TMDB and got API and Access Token
+ - Get data from TMDB Now playing movies list API
+ - Custom hook for now playing movies
+ - Create MovieSlice
+ - Update store with movies data
+ - Planning for Main Container & Secondary Container
+ - Fetch data for trailer video
+ - Update store with trailer video data
+ - Embed the yputube video and make it auto play and mute
+ - Tailwind clases to make MainContainer to look awesome
+ 
 
 # Features
  - Login / Sign Up
