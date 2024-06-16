@@ -6,9 +6,9 @@ import { BACKGROUND_IMAGE_SIGNIN } from "../constants";
 export function GptSearch(){
      return (
        <>
-         <div className="fixed -z-10">
+         <div className=" fixed -z-10">
            <img
-             className="h-screen object-cover"
+             className="w-screen h-screen object-cover"
              src={BACKGROUND_IMAGE_SIGNIN}
              alt="logo"
            />
