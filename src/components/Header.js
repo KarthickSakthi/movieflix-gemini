@@ -49,28 +49,28 @@ export function Header() {
     dispatch(changeLanguage(event.target.value))
   }
   return (
-    <div className=" absolute z-10 w-screen px-8 py-2 bg-gradient-to-b from-black flex justify-between">
-      <img className=" w-44" src={LOGO} alt="logo" />
+    <div className=" absolute z-10 w-screen px-8 py-2 bg-gradient-to-b from-black flex flex-col md:flex-row justify-between">
+      <img className=" w-44 mx-auto md:mx-0" src={LOGO} alt="logo" />
 
       {user && (
-        <div className="flex gap-2 items-center">
-
-         { showGptSearch && 
-          <select
-            className="p-2 m-2 bg-gray-900 text-white"
-            onChange={handleLanguageChange}
-          >
-            {SUPPORTED_LANGUAGES.map((lang) => (
-              <option key={lang.identifier} value={lang.identifier}>
-                {lang.name}
-              </option>
-            ))}
-          </select> }
+        <div className="flex gap-2 items-center justify-between">
+          {showGptSearch && (
+            <select
+              className="p-2 m-2 bg-gray-900 text-white"
+              onChange={handleLanguageChange}
+            >
+              {SUPPORTED_LANGUAGES.map((lang) => (
+                <option key={lang.identifier} value={lang.identifier}>
+                  {lang.name}
+                </option>
+              ))}
+            </select>
+          )}
           <button
             className="py-2 px-4 mx-4 my-2 bg-purple-800 text-white rounded-lg"
             onClick={handleGptSearch}
           >
-          {showGptSearch ? "Home Page" :"GPT Search"}  
+            {showGptSearch ? "Home Page" : "GPT Search"}
           </button>
           <button
             className=" bg-red-700 font-bold text-white p-2  rounded-lg"
@@ -78,7 +78,11 @@ export function Header() {
           >
             (Sign out)
           </button>
-          <img src={user?.photoURL} alt="sign out" className="  w-10 h-10" />
+          <img
+            src={user?.photoURL}
+            alt="sign out"
+            className="hidden md:block w-12 h-12"
+          />
         </div>
       )}
     </div>
