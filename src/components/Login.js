@@ -107,7 +107,7 @@ export function Login() {
         <img
           src={BACKGROUND_IMAGE_SIGNIN}
           alt="login background"
-          className="h-screen object-cover selection:w-full"
+          className="h-screen object-cover w-full"
         />
       </div>
       <form className="flex flex-col justify-start bg-black p-12 w-full md:w-3/12  absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2  bg-opacity-85">
