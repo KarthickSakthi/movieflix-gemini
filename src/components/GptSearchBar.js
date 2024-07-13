@@ -1,7 +1,8 @@
 import React, { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import lang from "../languageConstants";
-import openai from "../openai.js"
+// import openai from "../openai.js"
+import gemini from "../gemini.js"
 import { API_OPTIONS } from "../constants.js";
 import {addGptMovieResult} from "../store/gptSlice.js"
 
@@ -33,25 +34,29 @@ export const GptSearchBar = () => {
       searchText.current.value +
       ". only give me names of 5 movies, comma seperated like the example result given ahead. Example Result: Gadar, Sholay, Don, Golmaal, Koi Mil Gaya";
 
-    const gptResults = await openai.chat.completions.create({
-      messages: [{ role: "user", content: gptQuery }],
-      model: "gpt-3.5-turbo",
-    });
+    // const gptResults = await openai.chat.completions.create({
+    //   messages: [{ role: "user", content: gptQuery }],
+    //   model: "gpt-3.5-turbo",
+    // });
 
-    if (!gptResults.choices) {
-      // TODO: Write Error Handling
-    }
+    // if (!gptResults.choices) {
+    //   // TODO: Write Error Handling
+    // }
 
-    console.log(gptResults.choices?.[0]?.message?.content);
+    // const gptMovies = gptResults.choices?.[0]?.message?.content.split(",");
+
+    // console.log(gptResults.choices?.[0]?.message?.content);
 
     // Andaz Apna Apna, Hera Pheri, Chupke Chupke, Jaane Bhi Do Yaaro, Padosan
-    const gptMovies = gptResults.choices?.[0]?.message?.content.split(",");
+    const geminiResults = await gemini.generateContent(gptQuery);
+    const response = geminiResults.response.text();
+    const geminiMovies = response.split(",");
 
     // ["Andaz Apna Apna", "Hera Pheri", "Chupke Chupke", "Jaane Bhi Do Yaaro", "Padosan"]
 
     // For each movie I will search TMDB API
 
-    const promiseArray = gptMovies.map((movie) => searchMovieTMDB(movie));
+    const promiseArray = geminiMovies.map((movie) => searchMovieTMDB(movie));
     // [Promise, Promise, Promise, Promise, Promise]
 
     const tmdbResults = await Promise.all(promiseArray);
@@ -59,7 +64,7 @@ export const GptSearchBar = () => {
     console.log(tmdbResults);
 
     dispatch(
-      addGptMovieResult({ movieNames: gptMovies, movieResults: tmdbResults })
+      addGptMovieResult({ movieNames: geminiMovies, movieResults: tmdbResults })
     );
   };
 
