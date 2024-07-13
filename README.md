@@ -1,4 +1,4 @@
-# Movieflix GPT
+# Movieflix Gemini
  - Create react app
  - Configured Tailwind Css
  - header
@@ -34,13 +34,13 @@
  - TMDB Image CDN URL
  - Made the Browsre page amazing with Tailwind CSS
  - usePopularMovies Custom hook
- - GPT Search Page
- - GPT Search Bar
+ - Gemini Search Page
+ - Gemini Search Bar
  - (BONUS) Multi-language Feature in our App)
  - Get Open AI Api Key 
- - Gpt Search API Call
- - fetched gptMoviesSuggestions from TMDB
- - created gptSlice added data
+ - Gemini Search API Call
+ - fetched geminiMoviesSuggestions from TMDB
+ - created geminiSlice added data
  - Resused Movie List component to make movie suggestion container
  - Memoization
  - Added .env file
@@ -59,6 +59,6 @@
          - Title and descriptions
          - Movie suggestions
             - MovieLists * n
- - Netflix GPT
+ - Search using Gemini
       - Search bar
       - Movie suggestion 

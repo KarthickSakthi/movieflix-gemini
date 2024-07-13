@@ -5,18 +5,18 @@ import { useNowPlayingMovies } from "../hooks/useNowPlayingMovies";
 import { MainContainer } from "./MainContainer";
 import { SecondaryContainer } from "./SecondaryContainer";
 import { usePopularMovies } from "../hooks/usePopularMovies";
-import { GptSearch } from "./GptSearch";
+import { GeminiSearch } from "./GeminiSearch";
 import { useSelector } from "react-redux";
 
 export function Browse() {
-  const showGptSearch = useSelector(store=>store.gpt.showGptSearch)
+  const showGeminiSearch = useSelector((store) => store.gemini.showGeminiSearch);
   useNowPlayingMovies();
   usePopularMovies();
   return (
     <div>
       <Header />
-      {showGptSearch ? (
-        <GptSearch />
+      {showGeminiSearch ? (
+        <GeminiSearch />
       ) : (
         <>
           <MainContainer />

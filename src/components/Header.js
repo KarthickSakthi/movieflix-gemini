@@ -5,12 +5,12 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser, removeUser } from "../store/userSlice.js";
 import { LOGO, SUPPORTED_LANGUAGES } from "../constants.js";
-import { toggleGptSearchView } from "../store/gptSlice.js";
+import { toggleGeminiSearchView } from "../store/geminiSlice.js";
 import { changeLanguage } from "../store/configSlice.js";
 export function Header() {
   const navigate = useNavigate();
   const user = useSelector((store) => store.user);
-  const showGptSearch = useSelector((store)=>store.gpt.showGptSearch)
+  const showGeminiSearch = useSelector((store) => store.gemini.showGeminiSearch);
   const dispatch = useDispatch();
   useEffect(function listenAuthChange() {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -39,14 +39,12 @@ export function Header() {
       });
   }
 
-  function handleGptSearch() {
-    dispatch(toggleGptSearchView());
+  function handleGeminiSearch() {
+    dispatch(toggleGeminiSearchView());
   }
 
-
-
   function handleLanguageChange(event) {
-    dispatch(changeLanguage(event.target.value))
+    dispatch(changeLanguage(event.target.value));
   }
   return (
     <div className=" absolute z-10 w-screen px-8 py-2 bg-gradient-to-b from-black flex flex-col md:flex-row justify-between">
@@ -54,7 +52,7 @@ export function Header() {
 
       {user && (
         <div className="flex gap-2 items-center justify-between">
-          {showGptSearch && (
+          {showGeminiSearch && (
             <select
               className="p-2 m-2 bg-gray-900 text-white"
               onChange={handleLanguageChange}
@@ -68,9 +66,9 @@ export function Header() {
           )}
           <button
             className="py-2 px-4 mx-4 my-2 bg-purple-800 text-white rounded-lg"
-            onClick={handleGptSearch}
+            onClick={handleGeminiSearch}
           >
-            {showGptSearch ? "Home Page" : "GPT Search"}
+            {showGeminiSearch ? "Home Page" : "GEMINI Search"}
           </button>
           <button
             className=" bg-red-700 font-bold text-white p-2  rounded-lg"
