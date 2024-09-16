@@ -24,7 +24,6 @@ export const GeminiSearchBar = () => {
   };
 
   const handleGeminiSearchClick = async () => {
-    console.log(searchText.current.value);
     // Make an API call to GEMINI API and get Movie Results
 
     const prompt =

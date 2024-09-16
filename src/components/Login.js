@@ -39,7 +39,6 @@ export function Login() {
           nameRef.current.value,
           !isSignin
         );
-    console.log({ formValidateData });
     setErrorMessage(formValidateData);
     if (formValidateData) return;
 

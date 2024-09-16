@@ -7,14 +7,13 @@ export function MainContainer() {
   const movies = useSelector((store) => store.movies?.nowPlaying);
 
   const mainMovie = movies && movies[0];
-  console.log({ mainMovie });
-  const { original_title = "", overview = "", id="" } = mainMovie || {};
+  const { original_title = "", overview = "", id = "" } = mainMovie || {};
 
   return (
     <>
       {mainMovie && (
         <div className="pt-[30%] bg-black md:pt-0">
-          <VideoTitle title={original_title} overview={overview} />
+          <VideoTitle title={original_title} overview={overview} movieId={id} />
           <VideoBackground movieId={id} />
         </div>
       )}

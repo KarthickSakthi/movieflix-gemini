@@ -17,7 +17,6 @@ export const useNowPlayingMovies = () => {
       const data = await response.json();
       dispatch(addNowPlayingMovies(data.results));
       setData(data);
-      console.log({ data });
     };
   !nowPlaying &&  getNowPlayingMovies();
   }, []);

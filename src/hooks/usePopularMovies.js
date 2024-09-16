@@ -16,7 +16,6 @@ export const usePopularMovies = () => {
       const data = await response.json();
       dispatch(addPopularMovies(data.results));
       setData(data);
-      console.log({ data });
     };
     getNowPlayingMovies();
   }, []);
